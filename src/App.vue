@@ -23,13 +23,22 @@ export default {
   },
   data() {
     return {
-      todos:[
-        {id:1,content:'追剧',isOver:false},
-        {id:2,content:'打球',isOver:true},
-        {id:3,content:'睡觉',isOver:false},
-        {id:4,content:'喝酸奶',isOver:true},
-      ]
+      // todos:[
+      //   {id:1,content:'追剧',isOver:false},
+      //   {id:2,content:'打球',isOver:true},
+      //   {id:3,content:'睡觉',isOver:false},
+      //   {id:4,content:'喝酸奶',isOver:true},
+      // ]
+      todos:JSON.parse(localStorage.getItem('TODOS_KEY')) || []
     }
+  },
+  watch:{
+      todos:{
+        deep:true,
+        handler(newVal,oldVal){
+          localStorage.setItem('TODOS_KEY',JSON.stringify(newVal))
+        }
+      }
   },
   methods: {
     addTodo(todo){
